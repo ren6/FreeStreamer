@@ -912,6 +912,8 @@ public:
 
 - (void)attemptRestart
 {
+    if (_wasPaused) return;
+    
     if (!self.internetConnectionAvailable) {
 #if defined(DEBUG) || (TARGET_IPHONE_SIMULATOR)
         NSLog(@"FSAudioStream: Internet connection not available. Not attempting a restart");
@@ -1681,7 +1683,7 @@ void AudioStreamStateObserver::audioStreamErrorOccurred(int errorCode, CFStringR
     
     [[NSNotificationCenter defaultCenter] postNotification:notification];
     
-    if (error == kFsAudioStreamErrorNetwork ||
+    if (//error == kFsAudioStreamErrorNetwork ||
         error == kFsAudioStreamErrorUnsupportedFormat ||
         error == kFsAudioStreamErrorOpen) {
         [priv attemptRestart];
