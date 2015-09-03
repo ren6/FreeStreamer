@@ -95,10 +95,7 @@
         } else {
             conf = [[FSStreamConfiguration alloc] init];
         }
-        
-        // Disable audio session handling
-        conf.automaticAudioSessionHandlingEnabled = NO;
-        
+                
         _audioStream = [[FSAudioStream alloc] initWithConfiguration:conf];
         
         if (self.audioController.needToSetVolume) {
